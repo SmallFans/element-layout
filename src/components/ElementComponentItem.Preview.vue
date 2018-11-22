@@ -20,17 +20,21 @@
       }"
     >
       <template v-for="(slot,i) in info.slots || []" >
-        <ElementComponentItem :selectNode="selectNode" v-if="typeof slot === 'object'" :key="i" :info="slot" :isChildren="isRoot" @selectInfo="(info) => {
+        <div @contextmenu.prevent.stop="mouseRightClick($event, slot)">
+        <ElementComponentItem :selectNode="selectNode" @mouseRightClick="(a,b)=>{$emit('mouseRightClick', a,b)}" v-if="typeof slot === 'object'" :key="i" :info="slot" :isChildren="isRoot" @selectInfo="(info) => {
           $emit('selectInfo',info)
         }"></ElementComponentItem>
+        </div>
       </template>
     </draggable>
 
     <template v-else v-for="(slot,i) in info.slots || []" >
-      <ElementComponentItem :selectNode="selectNode" v-if="typeof slot === 'object'" :key="i" :info="slot" :isChildren="isRoot"
+      <div @contextmenu.prevent.stop="mouseRightClick($event, slot)">
+      <ElementComponentItem :selectNode="selectNode" @mouseRightClick="(a,b)=>{$emit('mouseRightClick', a,b)}" v-if="typeof slot === 'object'" :key="i" :info="slot" :isChildren="isRoot"
       @selectInfo="(info) => {
         $emit('selectInfo',info)
       }"></ElementComponentItem>
+      </div>
     </template>
   </component>
   </div>
@@ -59,9 +63,10 @@ export default {
     }
   },
   methods: {
-    mouseRightClick (event) {
+    mouseRightClick (event, slot) {
       console.log(event)
-      this.$emit('mouseRightClick', event)
+      console.log(slot)
+      this.$emit('mouseRightClick', event, slot)
     }
   }
 }

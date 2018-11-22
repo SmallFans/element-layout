@@ -8,6 +8,7 @@ import draggable from 'vuedraggable'
 import './metadatas/index.js'
 import RootBlank from './components/RootBlank.vue'
 import TemplateComponent from '@/components/TemplateComponent.vue'
+import './assets/common.css'
 
 Vue.use(ElementUI)
 Vue.component('draggable', draggable)

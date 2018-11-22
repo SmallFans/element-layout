@@ -24,21 +24,21 @@ export default {
   name: 'Preview',
   data () {
     return {
-      componentLsit: [{
-        componentName: 'RootBlank',
-        slots: []
-      }],
       selectNode: null
     }
   },
+  props: {
+    componentLsit: Array
+  },
   methods: {
-    mouseRightClick (event) {
-      this.$emit('mouseRightClick', event)
+    mouseRightClick (event, slot) {
+      this.$emit('mouseRightClick', event, slot)
     },
     renderContent (h, { node, data, store }) {
       return h('div', ['1234'])
     },
     handleNodeClick (data) {
+      console.log(data)
       this.selectNode = data
     }
   },

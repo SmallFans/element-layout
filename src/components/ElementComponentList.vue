@@ -15,7 +15,7 @@
 <script>
 import ElementComponentItem from '@/components/ElementComponentItem.vue'
 import lodash from 'lodash'
-
+import uuid from 'uuid'
 export default {
   name: 'ElementComponentList',
   data () {
@@ -40,12 +40,14 @@ export default {
           componentName: 'ElRow',
           slots: [{
             componentName: 'ElCol',
+            id: uuid.v1(),
             props: {
               span: 12
             },
             slots: []
           }, {
             componentName: 'ElCol',
+            id: uuid.v1(),
             props: {
               span: 12
             },
@@ -67,6 +69,7 @@ export default {
   },
   methods: {
     handleClone: function (item) {
+      item.id = uuid.v1()
       return lodash.cloneDeep(item)
     }
   }
